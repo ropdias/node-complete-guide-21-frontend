@@ -11,7 +11,7 @@ Section 28 covered:
 - [x] Adding Input Validation
 - [x] Handling Errors
 - [x] Connecting the Frontend to the GraphQL API
-- [ ] Adding a Login Query & a Resolver
+- [x] Adding a Login Query & a Resolver
 - [ ] Adding Login Functionality
 - [ ] Adding a Create Post Mutation
 - [ ] Extracting User Data From the Auth Token
