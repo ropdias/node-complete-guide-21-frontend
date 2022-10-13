@@ -6,7 +6,7 @@ Section 28 covered:
 
 - [x] What is GraphQL?
 - [x] Understanding the Setup & Writing our First Query
-- [ ] Defining a Mutation Schema
+- [x] Defining a Mutation Schema
 - [ ] Adding a Mutation Resolver & GraphiQL
 - [ ] Adding Input Validation
 - [ ] Handling Errors
