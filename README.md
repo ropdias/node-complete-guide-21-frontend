@@ -9,7 +9,7 @@ Section 28 covered:
 - [x] Defining a Mutation Schema
 - [x] Adding a Mutation Resolver & GraphiQL
 - [x] Adding Input Validation
-- [ ] Handling Errors
+- [x] Handling Errors
 - [ ] Connecting the Frontend to the GraphQL API
 - [ ] Adding a Login Query & a Resolver
 - [ ] Adding Login Functionality
