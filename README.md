@@ -8,7 +8,7 @@ Section 28 covered:
 - [x] Understanding the Setup & Writing our First Query
 - [x] Defining a Mutation Schema
 - [x] Adding a Mutation Resolver & GraphiQL
-- [ ] Adding Input Validation
+- [x] Adding Input Validation
 - [ ] Handling Errors
 - [ ] Connecting the Frontend to the GraphQL API
 - [ ] Adding a Login Query & a Resolver
