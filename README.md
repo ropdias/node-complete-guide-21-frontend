@@ -17,7 +17,7 @@ Section 28 covered:
 - [x] Extracting User Data From the Auth Token
 - [x] Sending the "Create Post" Query
 - [x] Fixing a Bug & Adding New Posts Correctly
-- [ ] Adding a "Get Post" Query & Resolver
+- [x] Adding a "Get Post" Query & Resolver
 - [ ] Sending "Create Post" and "Get Post" Queries
 - [ ] Adding Pagination
 - [ ] Uploading Images
