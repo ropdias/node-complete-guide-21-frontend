@@ -18,7 +18,7 @@ Section 28 covered:
 - [x] Sending the "Create Post" Query
 - [x] Fixing a Bug & Adding New Posts Correctly
 - [x] Adding a "Get Post" Query & Resolver
-- [ ] Sending "Create Post" and "Get Post" Queries
+- [x] Sending "Create Post" and "Get Post" Queries
 - [ ] Adding Pagination
 - [ ] Uploading Images
 - [ ] Fetching the imageUrl
