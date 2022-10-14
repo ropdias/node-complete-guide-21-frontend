@@ -16,7 +16,7 @@ Section 28 covered:
 - [x] Adding a Create Post Mutation
 - [x] Extracting User Data From the Auth Token
 - [x] Sending the "Create Post" Query
-- [ ] Fixing a Bug & Adding New Posts Correctly
+- [x] Fixing a Bug & Adding New Posts Correctly
 - [ ] Adding a "Get Post" Query & Resolver
 - [ ] Sending "Create Post" and "Get Post" Queries
 - [ ] Adding Pagination

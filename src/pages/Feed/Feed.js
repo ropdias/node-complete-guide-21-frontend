@@ -183,13 +183,13 @@ class Feed extends Component {
           throw new Error("User login failed!");
         }
         console.log(resData);
-        // const post = {
-        //   _id: resData.post._id,
-        //   title: resData.post.title,
-        //   content: resData.post.content,
-        //   creator: resData.creator,
-        //   createdAt: resData.post.createdAt,
-        // };
+        const post = {
+          _id: resData.data.createPost._id,
+          title: resData.data.createPost.title,
+          content: resData.data.createPost.content,
+          creator: resData.data.createPost.creator.name,
+          createdAt: resData.data.createPost.createdAt,
+        };
         this.setState((prevState) => {
           // let updatedPosts = [...prevState.posts];
           // if (prevState.editPost) {
