@@ -15,7 +15,7 @@ Section 28 covered:
 - [x] Adding Login Functionality
 - [x] Adding a Create Post Mutation
 - [x] Extracting User Data From the Auth Token
-- [ ] Sending the "Create Post" Query
+- [x] Sending the "Create Post" Query
 - [ ] Fixing a Bug & Adding New Posts Correctly
 - [ ] Adding a "Get Post" Query & Resolver
 - [ ] Sending "Create Post" and "Get Post" Queries

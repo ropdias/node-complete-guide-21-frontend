@@ -131,28 +131,57 @@ class Feed extends Component {
     formData.append("title", postData.title);
     formData.append("content", postData.content);
     formData.append("image", postData.image); // We will look for this field in our REST API
-    let url = "http://localhost:8080/feed/post";
-    let method = "POST";
-    if (this.state.editPost) {
-      url = "http://localhost:8080/feed/post/" + this.state.editPost._id;
-      method = "PUT";
-    }
+    // let url = "http://localhost:8080/feed/post";
+    // let method = "POST";
+    // if (this.state.editPost) {
+    //   url = "http://localhost:8080/feed/post/" + this.state.editPost._id;
+    //   method = "PUT";
+    // }
 
-    fetch(url, {
-      method: method,
+    let graphqlQuery = {
+      query: `
+        mutation {
+          createPost(postInput: {title: "${postData.title}", content: "${postData.content}", imageUrl: "Some url"}) {
+            _id
+            title
+            content
+            imageUrl
+            creator {
+              name
+            }
+            createdAt
+          }
+        }
+      `,
+    };
+
+    fetch("http://localhost:8080/graphql", {
+      method: "POST",
       // We don't need the headers here, FormData will automatically set the headers
-      body: formData, // We just need to pass formData here
+      // body: formData, // We just need to pass formData here
+      body: JSON.stringify(graphqlQuery),
       headers: {
         Authorization: "Bearer " + this.props.token,
+        "Content-Type": "application/json", // We need the Content-Type header again here, we are not using the FormData
       },
     })
       .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error("Creating or editing a post failed!");
-        }
+        // if (res.status !== 200 && res.status !== 201) {
+        //   throw new Error("Creating or editing a post failed!");
+        // }
         return res.json();
       })
       .then((resData) => {
+        // We will check errors here:
+        if (resData.errors && resData.errors[0].status === 422) {
+          throw new Error("Validation failed. Title or content is invalid.");
+        }
+        if (resData.errors && resData.errors[0].status === 401) {
+          throw new Error("Validation failed. Could not authenticate you!");
+        }
+        if (resData.errors) {
+          throw new Error("User login failed!");
+        }
         console.log(resData);
         // const post = {
         //   _id: resData.post._id,
