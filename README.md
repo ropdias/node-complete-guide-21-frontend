@@ -21,8 +21,8 @@ Section 28 covered:
 - [x] Sending "Create Post" and "Get Post" Queries
 - [x] Adding Pagination
 - [x] Uploading Images
-- [ ] Fetching the imageUrl
-- [ ] Viewing a Single Post
+- [x] Fetching the imageUrl
+- [x] Viewing a Single Post
 - [ ] Updating Posts
 - [ ] Deleting Posts
 - [ ] Adding Posts & Pagination
