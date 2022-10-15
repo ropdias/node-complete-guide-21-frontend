@@ -28,7 +28,7 @@ Section 28 covered:
 - [x] Adding Posts & Pagination
 - [x] Managing the User Status
 - [x] Using Variables
-- [ ] Fixing a Pagination Bug
+- [x] Fixing a Pagination Bug
 
 
 
