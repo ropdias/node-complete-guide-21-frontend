@@ -25,8 +25,8 @@ Section 28 covered:
 - [x] Viewing a Single Post
 - [x] Updating Posts
 - [x] Deleting Posts
-- [ ] Adding Posts & Pagination
-- [ ] Managing the User Status
+- [x] Adding Posts & Pagination
+- [x] Managing the User Status
 - [ ] Using Variables
 - [ ] Fixing a Pagination Bug
 
