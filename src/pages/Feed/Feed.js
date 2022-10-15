@@ -62,6 +62,7 @@ class Feed extends Component {
             _id
             title
             content
+            imageUrl
             creator {
               name
             }
@@ -155,43 +156,50 @@ class Feed extends Component {
       editLoading: true,
     });
     const formData = new FormData(); // We should use FormData() to create a form and append data to it
-    formData.append("title", postData.title);
-    formData.append("content", postData.content);
+    // formData.append("title", postData.title);
+    // formData.append("content", postData.content);
     formData.append("image", postData.image); // We will look for this field in our REST API
-    // let url = "http://localhost:8080/feed/post";
-    // let method = "POST";
-    // if (this.state.editPost) {
-    //   url = "http://localhost:8080/feed/post/" + this.state.editPost._id;
-    //   method = "PUT";
-    // }
-
-    let graphqlQuery = {
-      query: `
-        mutation {
-          createPost(postInput: {title: "${postData.title}", content: "${postData.content}", imageUrl: "Some url"}) {
-            _id
-            title
-            content
-            imageUrl
-            creator {
-              name
-            }
-            createdAt
-          }
-        }
-      `,
-    };
-
-    fetch("http://localhost:8080/graphql", {
-      method: "POST",
+    if (this.state.editPost) {
+      formData.append("oldPath", this.state.editPost.imagePath);
+    }
+    fetch("http://localhost:8080/post-image", {
+      method: "PUT",
       // We don't need the headers here, FormData will automatically set the headers
-      // body: formData, // We just need to pass formData here
-      body: JSON.stringify(graphqlQuery),
       headers: {
         Authorization: "Bearer " + this.props.token,
-        "Content-Type": "application/json", // We need the Content-Type header again here, we are not using the FormData
       },
+      body: formData, // We just need to pass formData here
     })
+      .then((res) => {
+        return res.json();
+      })
+      .then((fileResData) => {
+        const imageUrl = fileResData.filePath;
+        let graphqlQuery = {
+          query: `
+            mutation {
+              createPost(postInput: {title: "${postData.title}", content: "${postData.content}", imageUrl: "${imageUrl}"}) {
+                _id
+                title
+                content
+                imageUrl
+                creator {
+                  name
+                }
+                createdAt
+              }
+            }
+          `,
+        };
+        return fetch("http://localhost:8080/graphql", {
+          method: "POST",
+          body: JSON.stringify(graphqlQuery),
+          headers: {
+            Authorization: "Bearer " + this.props.token,
+            "Content-Type": "application/json", // We need the Content-Type header again here, we are not using the FormData
+          },
+        });
+      })
       .then((res) => {
         // if (res.status !== 200 && res.status !== 201) {
         //   throw new Error("Creating or editing a post failed!");
@@ -216,6 +224,7 @@ class Feed extends Component {
           content: resData.data.createPost.content,
           creator: resData.data.createPost.creator.name,
           createdAt: resData.data.createPost.createdAt,
+          imagePath: resData.data.createPost.imageUrl,
         };
         this.setState((prevState) => {
           let updatedPosts = [...prevState.posts];
@@ -224,8 +233,10 @@ class Feed extends Component {
               (p) => p._id === prevState.editPost._id
             );
             updatedPosts[postIndex] = post;
-          } else {
+          } else if (prevState.posts.length === 2) {
             updatedPosts.pop();
+            updatedPosts.unshift(post);
+          } else {
             updatedPosts.unshift(post);
           }
           // } else if (prevState.posts.length < 2) {

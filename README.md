@@ -20,7 +20,7 @@ Section 28 covered:
 - [x] Adding a "Get Post" Query & Resolver
 - [x] Sending "Create Post" and "Get Post" Queries
 - [x] Adding Pagination
-- [ ] Uploading Images
+- [x] Uploading Images
 - [ ] Fetching the imageUrl
 - [ ] Viewing a Single Post
 - [ ] Updating Posts
