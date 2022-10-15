@@ -24,7 +24,7 @@ Section 28 covered:
 - [x] Fetching the imageUrl
 - [x] Viewing a Single Post
 - [x] Updating Posts
-- [ ] Deleting Posts
+- [x] Deleting Posts
 - [ ] Adding Posts & Pagination
 - [ ] Managing the User Status
 - [ ] Using Variables

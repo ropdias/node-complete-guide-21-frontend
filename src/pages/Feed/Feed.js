@@ -236,9 +236,9 @@ class Feed extends Component {
           throw new Error("Creating/Editing a post failed!");
         }
         console.log(resData);
-        let resDataField = 'createPost';
+        let resDataField = "createPost";
         if (this.state.editPost) {
-          resDataField = 'updatePost';
+          resDataField = "updatePost";
         }
         const post = {
           _id: resData.data[resDataField]._id,
@@ -289,24 +289,46 @@ class Feed extends Component {
 
   deletePostHandler = (postId) => {
     this.setState({ postsLoading: true });
-    fetch("http://localhost:8080/feed/post/" + postId, {
-      method: "DELETE",
+    const graphqlQuery = {
+      query: `
+      mutation {
+        deletePost(id: "${postId}")
+      }
+      `,
+    };
+    fetch("http://localhost:8080/graphql", {
+      method: "POST",
+      body: JSON.stringify(graphqlQuery),
       headers: {
         Authorization: "Bearer " + this.props.token,
+        "Content-Type": "application/json",
       },
     })
       .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error("Deleting a post failed!");
-        }
+        // if (res.status !== 200 && res.status !== 201) {
+        //   throw new Error("Deleting a post failed!");
+        // }
         return res.json();
       })
       .then((resData) => {
+        // We will check errors here:
+        if (resData.errors && resData.errors[0].status === 401) {
+          throw new Error("Validation failed. Could not authenticate you!");
+        }
+        if (resData.errors && resData.errors[0].status === 404) {
+          throw new Error("Could not find post.");
+        }
+        if (resData.errors && resData.errors[0].status === 403) {
+          throw new Error("Not authorized!");
+        }
+        if (resData.errors) {
+          throw new Error("Deleting a post failed!");
+        }
         console.log(resData);
-        // this.setState((prevState) => {
-        //   const updatedPosts = prevState.posts.filter((p) => p._id !== postId);
-        //   return { posts: updatedPosts, postsLoading: false };
-        // });
+        this.setState((prevState) => {
+          const updatedPosts = prevState.posts.filter((p) => p._id !== postId);
+          return { posts: updatedPosts, postsLoading: false };
+        });
       })
       .catch((err) => {
         console.log(err);
