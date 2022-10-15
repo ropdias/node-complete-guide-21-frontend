@@ -23,7 +23,7 @@ Section 28 covered:
 - [x] Uploading Images
 - [x] Fetching the imageUrl
 - [x] Viewing a Single Post
-- [ ] Updating Posts
+- [x] Updating Posts
 - [ ] Deleting Posts
 - [ ] Adding Posts & Pagination
 - [ ] Managing the User Status
